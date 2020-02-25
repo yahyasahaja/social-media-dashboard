@@ -5,6 +5,7 @@ import { UserContext } from '../contexts/UserContext';
 import { COLORS } from '../config';
 import List from '@material-ui/core/List';
 import UserListItem from '../components/UserListItem';
+import UserItemSkeleton from '../components/UserItemSkeleton';
 
 const StyledUsers = styled.div`
   display: block;
@@ -29,13 +30,9 @@ const StyledUsers = styled.div`
 `;
 
 const Users = () => {
-  let userContext = React.useContext(UserContext);
+  let { fetchUsers, users, isFetchingUsers } = React.useContext(UserContext);
 
   React.useEffect(() => {
-    async function fetchUsers() {
-      userContext.fetchUsers();
-    }
-    
     fetchUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -50,12 +47,24 @@ const Users = () => {
         <div className="title" >Users</div>
 
         <List>
-          {userContext.users.map((user, i) => (
-            <UserListItem
-              key={i}
-              user={user}
-            />
-          ))}
+          {
+            isFetchingUsers
+              ? (
+                <div>
+                  <UserItemSkeleton />
+                  <UserItemSkeleton />
+                  <UserItemSkeleton />
+                </div>
+              )
+              : (
+                users.map((user, i) => (
+                  <UserListItem
+                    key={i}
+                    user={user}
+                  />
+                ))
+              )
+          }
         </List>
       </Card>
     </StyledUsers>
