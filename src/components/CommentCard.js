@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import AvatarName from './AvatarName';
+import Button from '@material-ui/core/Button';
+import { CommentDialogContext } from '../contexts/CommentDialogContext';
 
 const StyledCommentCardSkeleton = styled.div`
   display: flex;
@@ -28,11 +30,31 @@ const StyledCommentCardSkeleton = styled.div`
       font-style: italic;
       font-size: 10pt;
     }
+
+    .comment-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+
+      .comment-button {
+        margin: 0 5px;
+      }
+    }
   }
 `;
 
 const CommentCard = props => {
-  let { comment } = props;
+  let { comment, postId } = props;
+  
+  let { 
+    setMutationName,
+    setMutationEmail,
+    setMutationBody,
+    setMutationId,
+    setPostId,
+    setIsUpdateDialogOpened,
+    setIsDeleteDialogOpened,
+  } = React.useContext(CommentDialogContext);
 
   return (
     <StyledCommentCardSkeleton>
@@ -48,6 +70,38 @@ const CommentCard = props => {
         </div>
         <div className="body" >
           {comment.body}
+        </div>
+        <div className="comment-actions" >
+          <div className="mutation-actions" >
+            <Button 
+              variant="outlined" 
+              color="primary"
+              className="comment-button"
+              onClick={() => {
+                setMutationName(comment.name);
+                setMutationEmail(comment.email);
+                setMutationBody(comment.body);
+                setMutationId(comment.id);
+                setPostId(postId);
+                setIsUpdateDialogOpened(true);
+              }}
+            >
+              Update
+            </Button>
+            <Button 
+              variant="outlined" 
+              color="secondary"
+              className="comment-button"
+              onClick={() => {
+                setMutationName(comment.name);
+                setMutationId(comment.id);
+                setPostId(postId);
+                setIsDeleteDialogOpened(true);
+              }}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       </div>
     </StyledCommentCardSkeleton>

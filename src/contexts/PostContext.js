@@ -13,6 +13,10 @@ export const defaultValue = {
   updatePost: () => {},
   fetchCommentByPostId: () => {},
   deletePost: () => {},
+  addPost: () => {},
+  addComment: () => {},
+  updateComment: () => {},
+  deleteComment: () => {},
 };
 
 export const PostContext = React.createContext(defaultValue);
@@ -35,6 +39,45 @@ class PostStoreClass extends Component {
     }
   }
 
+  addPost = async (body) => {
+    try {
+      this.props.overlayLoadingContext.show();
+      let { data } = await axios.post('/posts', body);
+      await this.fetchPosts(this.props.userContext.user.id);
+      return data;
+    } catch (err) {
+      console.log('ERROR WHILE ADDING POST', err);
+    } finally {
+      this.props.overlayLoadingContext.hide();
+    }
+  }
+
+  updatePost = async (postId, body) => {
+    try {
+      this.props.overlayLoadingContext.show();
+      let { data } = await axios.put(`/posts/${postId}`, body);
+      await this.fetchPosts(this.props.userContext.user.id);
+      return data;
+    } catch (err) {
+      console.log('ERROR WHILE UPDATING POST', err);
+    } finally {
+      this.props.overlayLoadingContext.hide();
+    }
+  }
+
+  deletePost = async (postId) => {
+    try {
+      this.props.overlayLoadingContext.show();
+      let { data } = await axios.delete(`/posts/${postId}`);
+      await this.fetchPosts(this.props.userContext.user.id);
+      return data;
+    } catch (err) {
+      console.log('ERROR WHILE DELETING POST', err);
+    } finally {
+      this.props.overlayLoadingContext.hide();
+    }
+  }
+
   fetchCommentByPostId = async postId => {
     try {
       this.setState({isFetchingComments: true});
@@ -53,27 +96,43 @@ class PostStoreClass extends Component {
     }
   }
 
-  updatePost = async (postId, body) => {
+  addComment = async (postId, body) => {
     try {
       this.props.overlayLoadingContext.show();
-      let { data } = await axios.put(`/posts/${postId}`, body);
-      await this.fetchPosts(this.props.userContext.user.id);
+      let { data } = await axios.post('/comments', body);
+      if (postId) await this.fetchCommentByPostId(postId);
+
       return data;
     } catch (err) {
-      console.log('ERROR WHILE FETCHING POSTS', err);
+      console.log('ERROR WHILE ADDING COMMENT', err);
     } finally {
       this.props.overlayLoadingContext.hide();
     }
   }
 
-  deletePost = async (postId) => {
+  updateComment = async (postId, commentId, body) => {
     try {
       this.props.overlayLoadingContext.show();
-      let { data } = await axios.delete(`/posts/${postId}`);
-      await this.fetchPosts(this.props.userContext.user.id);
+      let { data } = await axios.put(`/comments/${commentId}`, body);
+      if (postId) await this.fetchCommentByPostId(postId);
+
       return data;
     } catch (err) {
-      console.log('ERROR WHILE FETCHING POSTS', err);
+      console.log('ERROR WHILE UPDATING COMMENT', err);
+    } finally {
+      this.props.overlayLoadingContext.hide();
+    }
+  }
+
+  deleteComment = async (postId, commentId) => {
+    try {
+      this.props.overlayLoadingContext.show();
+      let { data } = await axios.delete(`/comments/${commentId}`);
+      if (postId) await this.fetchCommentByPostId(postId);
+
+      return data;
+    } catch (err) {
+      console.log('ERROR WHILE DELETINNG COMMENT', err);
     } finally {
       this.props.overlayLoadingContext.hide();
     }
@@ -89,6 +148,10 @@ class PostStoreClass extends Component {
           fetchCommentByPostId: this.fetchCommentByPostId,
           updatePost: this.updatePost,
           deletePost: this.deletePost,
+          addPost: this.addPost,
+          addComment: this.addComment,
+          updateComment: this.updateComment,
+          deleteComment: this.deleteComment,
         }}
       >
         {this.props.children}

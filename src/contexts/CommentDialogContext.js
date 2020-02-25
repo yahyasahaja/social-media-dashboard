@@ -3,47 +3,57 @@ import React from 'react';
 export const defaultValue = {
   isUpdateDialogOpened: false,
   isDeleteDialogOpened: false,
-  mutationTitle: '',
+  mutationName: '',
+  mutationEmail: '',
   mutationBody: '',
   mutationId: null,
+  postId: null,
   setIsUpdateDialogOpened: () => {},
   setIsDeleteDialogOpened: () => {},
-  setMutationTitle: () => {},
+  setMutationName: () => {},
+  setMutationEmail: () => {},
   setMutationBody: () => {},
   setMutationId: () => {},
+  setPostId: () => {},
 };
 
-export const PostDialogContext = React.createContext(defaultValue);
+export const CommentDialogContext = React.createContext(defaultValue);
 
-export const PostDialogStore = props => {
+export const CommentDialogStore = props => {
   let [ isUpdateDialogOpened, setIsUpdateDialogOpened ] = React.useState(false);
   let [ isDeleteDialogOpened, setIsDeleteDialogOpened ] = React.useState(false);
-  let [ mutationTitle, setMutationTitle ] = React.useState('');
+  let [ mutationName, setMutationName ] = React.useState('');
+  let [ mutationEmail, setMutationEmail ] = React.useState('');
   let [ mutationBody, setMutationBody ] = React.useState('');
   let [ mutationId, setMutationId ] = React.useState(null);
+  let [ postId, setPostId ] = React.useState(null);
   
   return (
-    <PostDialogContext.Provider
+    <CommentDialogContext.Provider
       value={{
         isUpdateDialogOpened,
         isDeleteDialogOpened,
-        mutationTitle,
+        mutationName,
+        mutationEmail,
         mutationBody,
         mutationId,
+        postId,
         setIsUpdateDialogOpened,
         setIsDeleteDialogOpened,
-        setMutationTitle,
+        setMutationName,
+        setMutationEmail,
         setMutationBody,
         setMutationId,
+        setPostId,
       }}
     >
       {props.children}
-    </PostDialogContext.Provider>
+    </CommentDialogContext.Provider>
   );
 };
 
-export const withPostDialog = Comp => props => (
-  <PostDialogContext.Consumer>
-    {context => <Comp {...props} postDialogContext={context} />}
-  </PostDialogContext.Consumer>
+export const withCommentDialog = Comp => props => (
+  <CommentDialogContext.Consumer>
+    {context => <Comp {...props} commentDialogContext={context} />}
+  </CommentDialogContext.Consumer>
 );

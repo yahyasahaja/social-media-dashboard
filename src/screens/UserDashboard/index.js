@@ -34,6 +34,7 @@ const UserDashboard = props => {
     return () => {
       userContext.clearUser();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navData = [

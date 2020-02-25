@@ -47,6 +47,7 @@ const Photos = props => {
     };
 
     fetchPhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [albumId]);
 
   return (

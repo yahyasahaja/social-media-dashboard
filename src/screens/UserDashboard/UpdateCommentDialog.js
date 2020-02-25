@@ -1,5 +1,4 @@
 import React from 'react';
-import { PostDialogContext } from '../../contexts/PostDialogContext';
 import { PostContext } from '../../contexts/PostContext';
 import { SnackbarContext } from '../../contexts/SnackbarContext';
 import Button from '@material-ui/core/Button';
@@ -8,20 +7,24 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
+import { CommentDialogContext } from '../../contexts/CommentDialogContext';
 
 export default () => {
   let { 
     isUpdateDialogOpened, 
     setIsUpdateDialogOpened,
-    mutationTitle,
-    setMutationTitle,
+    mutationName,
+    setMutationName,
+    mutationEmail,
+    setMutationEmail,
     mutationBody,
     setMutationBody,
+    postId,
     mutationId,
-  } = React.useContext(PostDialogContext);
+  } = React.useContext(CommentDialogContext);
 
   let { 
-    updatePost
+    updateComment,
   } = React.useContext(PostContext);
 
   let snackbarContext = React.useContext(SnackbarContext);
@@ -38,37 +41,49 @@ export default () => {
       <form
         onSubmit={async e => {
           e.preventDefault();
-          let result = await updatePost(
-            mutationId, 
+          let result = await updateComment(
+            postId,
+            mutationId,
             {
-              title: mutationTitle,
+              name: mutationName,
+              email: mutationEmail,
               body: mutationBody,
             },
           );
 
           if (result) {
             snackbarContext.show(
-              'Update post successful',
+              'Update comment successful',
               { severity: 'success' },
             );
           } else {
             snackbarContext.show(
-              'Failed to update post',
+              'Failed to update comment',
               { severity: 'error' },
             );
           }
         }}
       >
-        <DialogTitle>Update Post</DialogTitle>
+        <DialogTitle>Update Comment</DialogTitle>
         <DialogContent>
           <TextField
-            label="Title"
+            label="Name"
             variant="outlined"
             margin="dense"
             required
             fullWidth
-            value={mutationTitle}
-            onChange={e => setMutationTitle(e.target.value)}
+            value={mutationName}
+            onChange={e => setMutationName(e.target.value)}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            variant="outlined"
+            margin="dense"
+            required
+            fullWidth
+            value={mutationEmail}
+            onChange={e => setMutationEmail(e.target.value)}
           />
           <TextField
             label="Body"

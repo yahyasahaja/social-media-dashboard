@@ -19,13 +19,15 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "react-hooks"
   ],
   "rules": {
     "no-console": "off",
     "no-extra-boolean-cast": "off",
     "linebreak-style": "off",
     "react/jsx-uses-react": "error",
+    "react-hooks/exhaustive-deps": "off",
     "react/jsx-uses-vars": [
       "error"
     ],

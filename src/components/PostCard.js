@@ -6,6 +6,7 @@ import { PostContext } from '../contexts/PostContext';
 import CommentCardSkeleton from './CommentCardSkeleton';
 import CommentCard from './CommentCard';
 import { PostDialogContext } from '../contexts/PostDialogContext';
+import NewCommentForm from './NewCommentForm';
 
 const StyledPostCard = styled.div`
   display: block;
@@ -43,6 +44,7 @@ const StyledPostCard = styled.div`
 
       .comment-label {
         font-weight: bold;
+        margin-top: 20px;
       }
     }
   }
@@ -129,8 +131,18 @@ const PostCard = props => {
           commentSectionOpened && (
             <div className="comment-wrapper" >
               <div className="comment-label" >
-                {comments.length} Comments
+                New Comment
               </div>
+              <NewCommentForm postId={post.id} />
+
+              <div className="comment-label" >
+                {
+                  !isCommentsReady 
+                    ? 'Fetching comments...' 
+                    : `${comments.length} Comments`
+                }
+              </div>
+
               {
                 isCommentsReady
                   ? (
@@ -139,6 +151,7 @@ const PostCard = props => {
                         <CommentCard 
                           key={i}
                           comment={comment}
+                          postId={post.id}
                         />
                       );
                     })

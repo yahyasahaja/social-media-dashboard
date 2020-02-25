@@ -3,9 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import styled from 'styled-components';
 
 const StyledPostsSkeleton = styled.div`
-  display: block;
-  flex: 1;
-  padding-top: 10px;
+  padding-top: 20px;
 
   .skeleton-wrapper {
     margin: 20px auto;

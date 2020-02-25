@@ -9,6 +9,11 @@ const StyledPhotoCard = styled.div`
   overflow: hidden;
   margin: 10px;
   cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   img {
     width: 100%;
@@ -16,37 +21,38 @@ const StyledPhotoCard = styled.div`
     object-fit: cover;
     object-position: center;
   }
+`;
 
-  .overlay-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    background: #00000096;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #00000096;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  cursor: pointer;
 
-    .overlay-content-wrapper {
-      display: block;
+  .overlay-content-wrapper {
+    display: block;
 
-      .photo-wrapper {
-        width: 500px;
-        height: 70vh;
+    .photo-wrapper {
+      width: 500px;
+      height: 70vh;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
-      .card {
-        margin: auto;
-        margin-top: 20px;
-        background: white;
-      }
+    }
+    .card {
+      margin: auto;
+      margin-top: 20px;
+      background: white;
     }
   }
 `;
@@ -55,27 +61,30 @@ const PhotoCard = ({photo}) => {
   let [ overlayOpened, setOverlayOpened ] = React.useState(false);
   
   return (
-    <StyledPhotoCard onClick={() => {
-      setOverlayOpened(!overlayOpened);
-    }} >
-      <img src={photo.thumbnailUrl} />
+    <>
+      <StyledPhotoCard onClick={() => {
+        setOverlayOpened(true);
+      }} >
+        <img src={photo.thumbnailUrl} alt="" />
+      </StyledPhotoCard>
       {
         overlayOpened && (
-          <div 
-            className="overlay-wrapper" 
+          <Overlay 
+            className="overlay-wrapper"
+            onClick={() => setOverlayOpened(false)}
           >
             <div className="overlay-content-wrapper" >
               <div className='photo-wrapper' >
-                <img src={photo.url} />
+                <img src={photo.url} alt="" />
               </div>
               <Card className="card" >
                 {photo.title}
               </Card>
             </div>
-          </div>
+          </Overlay>
         )
       }
-    </StyledPhotoCard>
+    </>
   );
 };
 
