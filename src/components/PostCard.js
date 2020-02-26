@@ -74,15 +74,16 @@ const PostCard = props => {
   return (
     <StyledPostCard>
       <Card className="card" >
-        <div className="post-title" >
+        <div data-testid="post-card-title" className="post-title" >
           {post.title}
         </div>
-        <div className="post-body" >
+        <div data-testid="post-card-body" className="post-body" >
           {post.body}
         </div>
 
         <div className="post-actions" >
           <Button 
+            data-testid="post-card-comment-button"
             className="comment-button"
             variant="outlined" 
             color="primary"
@@ -129,7 +130,10 @@ const PostCard = props => {
 
         {
           commentSectionOpened && (
-            <div className="comment-wrapper" >
+            <div 
+              className="comment-wrapper"
+              data-testid="post-card-comment-section"
+            >
               <div className="comment-label" >
                 New Comment
               </div>

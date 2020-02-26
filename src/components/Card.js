@@ -6,6 +6,7 @@ const StyledCard = styled.div`
   margin: 20px;
   border-radius: 20px;
   box-shadow: 1px 10px 60px 0 #c7c7c7;
+  background: white;
 `;
 
 const Card = props => (

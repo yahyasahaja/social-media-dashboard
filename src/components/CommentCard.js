@@ -62,13 +62,13 @@ const CommentCard = props => {
         <AvatarName name={comment.name} width={50} height={50} />
       </div>
       <div className="comment-detail-wrapper" >
-        <div className="name" >
+        <div data-testid="comment-name" className="name" >
           {comment.name}
         </div>
-        <div className="email" >
+        <div data-testid="comment-email" className="email" >
           {comment.email}
         </div>
-        <div className="body" >
+        <div data-testid="comment-body" className="body" >
           {comment.body}
         </div>
         <div className="comment-actions" >

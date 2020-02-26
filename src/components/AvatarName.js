@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../config';
+import { generateAvatarName } from '../utils';
 
 const StyledCommentCardSkeleton = styled.div`
   display: flex;
@@ -21,14 +22,11 @@ const StyledCommentCardSkeleton = styled.div`
 
 export default props => {
   return (
-    <StyledCommentCardSkeleton width={props.width} height={props.height}>
-      {
-        props.name
-          .split(' ')
-          .slice(0, 2)
-          .map(n => n[0])
-          .join('')
-      }
+    <StyledCommentCardSkeleton 
+      width={props.width} height={props.height}
+      data-testid="avatar-name"
+    >
+      {generateAvatarName(props.name)}
     </StyledCommentCardSkeleton>
   );
 };

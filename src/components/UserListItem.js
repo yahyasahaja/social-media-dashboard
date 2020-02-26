@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { COLORS } from '../config';
+import { generateAvatarName } from '../utils';
 
 const StyledListItem = styled(ListItem)`
   && {
@@ -30,23 +31,23 @@ const UserListItem = props => {
       onClick={() => {
         history.push(`/users/${id}`);
       }}
+      data-testid="user-list-item"
     >
       <ListItemAvatar>
         <Avatar className="avatar" >
           <div 
+            data-testid="user-list-item-avatar-name"
             className="avatar-name"
           >
-            {
-              name
-                .split(' ')
-                .slice(0, 2)
-                .map(n => n[0])
-                .join('')
-            }
+            {generateAvatarName(name)}
           </div>
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={name} secondary={email} />
+      <ListItemText 
+        data-testid="user-list-item-name-email" 
+        primary={name} 
+        secondary={email}
+      />
     </StyledListItem>
   );
 };

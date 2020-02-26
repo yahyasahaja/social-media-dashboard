@@ -43,6 +43,7 @@ const Navigation = props => {
         >
           <ListItemIcon><MDIcon icon='chevron-left' /></ListItemIcon>
           <ListItemText
+            data-testid="navigation-name"
             primary={userName}
           />
         </ListItem>
@@ -55,6 +56,7 @@ const Navigation = props => {
             onClick={() => {
               history.push(nav.path);
             }}
+            data-testid="route-list-item"
           >
             <ListItemIcon><MDIcon icon={nav.icon} /></ListItemIcon>
             <ListItemText primary={nav.label} />

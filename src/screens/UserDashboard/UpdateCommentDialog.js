@@ -56,6 +56,7 @@ export default () => {
               'Update comment successful',
               { severity: 'success' },
             );
+            setIsUpdateDialogOpened(false);
           } else {
             snackbarContext.show(
               'Failed to update comment',

@@ -4,6 +4,7 @@ import { UserContext } from '../../contexts/UserContext';
 import Card from '../../components/Card';
 import { COLORS } from '../../config';
 import { CircularProgress } from '@material-ui/core';
+import { generateAvatarName } from '../../utils';
 
 const StyledAbout = styled.div`
   display: block;
@@ -87,13 +88,7 @@ const About = () => {
             : (
               <>
                 <div className="avatar-name" >
-                  {
-                    user.name
-                      .split(' ')
-                      .slice(0, 2)
-                      .map(n => n[0])
-                      .join('')
-                  }
+                  {generateAvatarName(user.name)}
                 </div>
                 <div className="name" >
                   {user.name}

@@ -54,6 +54,7 @@ export default () => {
               'Delete comment successful',
               { severity: 'success' },
             );
+            setIsDeleteDialogOpened(false);
           } else {
             snackbarContext.show(
               'Failed to delete comment',

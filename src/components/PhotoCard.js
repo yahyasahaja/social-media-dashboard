@@ -62,23 +62,24 @@ const PhotoCard = ({photo}) => {
   
   return (
     <>
-      <StyledPhotoCard onClick={() => {
+      <StyledPhotoCard data-testid="photo-card" onClick={() => {
         setOverlayOpened(true);
       }} >
-        <img src={photo.thumbnailUrl} alt="" />
+        <img data-testid="photo-card-thumbnail" src={photo.thumbnailUrl} alt="" />
       </StyledPhotoCard>
       {
         overlayOpened && (
           <Overlay 
+            data-testid="photo-card-overlay"
             className="overlay-wrapper"
             onClick={() => setOverlayOpened(false)}
           >
             <div className="overlay-content-wrapper" >
               <div className='photo-wrapper' >
-                <img src={photo.url} alt="" />
+                <img data-testid="photo-card-url" src={photo.url} alt="" />
               </div>
               <Card className="card" >
-                {photo.title}
+                <span data-testid="photo-card-title" >{photo.title}</span>
               </Card>
             </div>
           </Overlay>

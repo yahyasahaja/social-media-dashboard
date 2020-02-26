@@ -50,7 +50,7 @@ const Users = () => {
           {
             isFetchingUsers
               ? (
-                <div>
+                <div data-testid="users-loading" >
                   <UserItemSkeleton />
                   <UserItemSkeleton />
                   <UserItemSkeleton />
