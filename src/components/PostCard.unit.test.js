@@ -41,6 +41,5 @@ describe('Test for component <PostCard />', () => {
         .find('[data-testid="post-card-comment-section"]')
         .exists()
     ).toEqual(true);
-    wrapper.unmount();
   });
 });

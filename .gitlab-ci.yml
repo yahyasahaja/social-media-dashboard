@@ -19,11 +19,20 @@ cache:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters.  
 stages:
+  - test
   - build
   # - staging
   - production
 
 # test and build
+Test:
+  image: node:12.5.0
+  stage: test
+  before_script: 
+    - yarn install 
+  script:
+    - CI=true yarn test -- --coverage
+
 Build:
   image: node:12.5.0
   stage: build
