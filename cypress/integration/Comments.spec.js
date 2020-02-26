@@ -11,6 +11,11 @@ describe('Comments', () => {
       'https://jsonplaceholder.typicode.com/users/1/posts',
       'fixture:posts.json'
     );
+    cy.route(
+      'GET', 
+      'https://jsonplaceholder.typicode.com/posts/1/comments',
+      'fixture:comments.json'
+    );
 
     cy.visit('/users/1/posts');
 
@@ -19,11 +24,6 @@ describe('Comments', () => {
       .find('[data-testid="post-card-comment-button"]')
       .click();
 
-    cy.route(
-      'GET', 
-      'https://jsonplaceholder.typicode.com/posts/1/comments',
-      'fixture:comments.json'
-    );
     cy.get('[data-testid="comment-card"]').should('have.length', 5);
   });
 
