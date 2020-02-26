@@ -35,7 +35,7 @@ stages:
 #     - CI=true yarn test --coverage
 
 End to end test:
-  image: node:12.5.0
+  image: cypress/base:10
   stage: e2e-test
   before_script: 
     - yarn install --frozen-lockfile
