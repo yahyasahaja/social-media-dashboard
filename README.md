@@ -30,3 +30,12 @@ I'm using (Model-View-ViewModel) as an app architecture.
 
 ## CI/CD
 Thanks for Gitlab CI and my aws account that this can be up at [https://socialmedia.ngopi.men](https://socialmedia.ngopi.men) with `passes` all of the tests (unit and e2e test)
+
+## TO RUN LOCALLY
+- clone repo
+- run `yarn install`
+- run `yarn start`
+
+To run test:
+- run `yarn cypress:open`
+- or run without UI: `yarn cypress:run`
