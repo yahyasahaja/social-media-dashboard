@@ -31,6 +31,7 @@ export default () => {
       fullWidth
       maxWidth="sm"
       open={isUpdateDialogOpened}
+      data-testid="update-post-dialog"
       onClose={() => {
         setIsUpdateDialogOpened(false);
       }}
@@ -47,6 +48,7 @@ export default () => {
           );
 
           if (result) {
+            setIsUpdateDialogOpened(false);
             snackbarContext.show(
               'Update post successful',
               { severity: 'success' },
@@ -65,6 +67,7 @@ export default () => {
             label="Title"
             variant="outlined"
             margin="dense"
+            data-testid="update-post-title"
             required
             fullWidth
             value={mutationTitle}
@@ -74,6 +77,7 @@ export default () => {
             label="Body"
             variant="outlined"
             margin="dense"
+            data-testid="update-post-body"
             required
             rows={4}
             multiline
@@ -92,6 +96,7 @@ export default () => {
             color="primary" 
             autoFocus
             type="submit"
+            data-testid="update-post-submit"
           >
             Update
           </Button>

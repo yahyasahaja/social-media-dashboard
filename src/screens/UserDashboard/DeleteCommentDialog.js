@@ -26,6 +26,7 @@ export default () => {
 
   return (
     <Dialog
+      data-testid="delete-comment-dialog"
       open={isDeleteDialogOpened}
       onClose={() => {
         setIsDeleteDialogOpened(false);
@@ -43,25 +44,30 @@ export default () => {
         }} color="primary">
           Cancel
         </Button>
-        <Button onClick={async () => {
-          let result = await deleteComment(
-            postId,
-            mutationId,
-          );
+        <Button 
+          data-testid="delete-comment-dialog-delete-button"
+          onClick={async () => {
+            let result = await deleteComment(
+              postId,
+              mutationId,
+            );
 
-          if (result) {
-            snackbarContext.show(
-              'Delete comment successful',
-              { severity: 'success' },
-            );
-            setIsDeleteDialogOpened(false);
-          } else {
-            snackbarContext.show(
-              'Failed to delete comment',
-              { severity: 'error' },
-            );
-          }
-        }} color="secondary" autoFocus>
+            if (result) {
+              snackbarContext.show(
+                'Delete comment successful',
+                { severity: 'success' },
+              );
+              setIsDeleteDialogOpened(false);
+            } else {
+              snackbarContext.show(
+                'Failed to delete comment',
+                { severity: 'error' },
+              );
+            }
+          }} 
+          color="secondary" 
+          autoFocus
+        >
           Delete
         </Button>
       </DialogActions>

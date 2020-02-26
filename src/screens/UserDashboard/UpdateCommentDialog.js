@@ -33,6 +33,7 @@ export default () => {
     <Dialog
       fullWidth
       maxWidth="sm"
+      data-testid="update-comment-dialog"
       open={isUpdateDialogOpened}
       onClose={() => {
         setIsUpdateDialogOpened(false);
@@ -71,6 +72,7 @@ export default () => {
             label="Name"
             variant="outlined"
             margin="dense"
+            data-testid="update-comment-dialog-name"
             required
             fullWidth
             value={mutationName}
@@ -81,6 +83,7 @@ export default () => {
             type="email"
             variant="outlined"
             margin="dense"
+            data-testid="update-comment-dialog-email"
             required
             fullWidth
             value={mutationEmail}
@@ -90,6 +93,7 @@ export default () => {
             label="Body"
             variant="outlined"
             margin="dense"
+            data-testid="update-comment-dialog-body"
             required
             rows={4}
             multiline
@@ -108,6 +112,7 @@ export default () => {
             color="primary" 
             autoFocus
             type="submit"
+            data-testid="update-comment-dialog-update-button"
           >
             Update
           </Button>

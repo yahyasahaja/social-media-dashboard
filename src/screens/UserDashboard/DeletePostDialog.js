@@ -25,6 +25,7 @@ export default () => {
 
   return (
     <Dialog
+      data-testid="delete-post-dialog"
       open={isDeleteDialogOpened}
       onClose={() => {
         setIsDeleteDialogOpened(false);
@@ -42,23 +43,29 @@ export default () => {
         }} color="primary">
           Cancel
         </Button>
-        <Button onClick={async () => {
-          let result = await deletePost(
-            mutationId,
-          );
+        <Button 
+          data-testid="delete-post-dialog-delete-button"
+          onClick={async () => {
+            let result = await deletePost(
+              mutationId,
+            );
 
-          if (result) {
-            snackbarContext.show(
-              'Delete post successful',
-              { severity: 'success' },
-            );
-          } else {
-            snackbarContext.show(
-              'Failed to delete post',
-              { severity: 'error' },
-            );
-          }
-        }} color="secondary" autoFocus>
+            if (result) {
+              snackbarContext.show(
+                'Delete post successful',
+                { severity: 'success' },
+              );
+              setIsDeleteDialogOpened(false);
+            } else {
+              snackbarContext.show(
+                'Failed to delete post',
+                { severity: 'error' },
+              );
+            }
+          }} 
+          color="secondary" 
+          autoFocus
+        >
           Delete
         </Button>
       </DialogActions>

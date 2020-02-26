@@ -57,7 +57,9 @@ const CommentCard = props => {
   } = React.useContext(CommentDialogContext);
 
   return (
-    <StyledCommentCardSkeleton>
+    <StyledCommentCardSkeleton
+      data-testid="comment-card"
+    >
       <div className="avatar-name" >
         <AvatarName name={comment.name} width={50} height={50} />
       </div>
@@ -77,6 +79,7 @@ const CommentCard = props => {
               variant="outlined" 
               color="primary"
               className="comment-button"
+              data-testid="comment-card-update-button"
               onClick={() => {
                 setMutationName(comment.name);
                 setMutationEmail(comment.email);
@@ -92,6 +95,7 @@ const CommentCard = props => {
               variant="outlined" 
               color="secondary"
               className="comment-button"
+              data-testid="comment-card-delete-button"
               onClick={() => {
                 setMutationName(comment.name);
                 setMutationId(comment.id);
