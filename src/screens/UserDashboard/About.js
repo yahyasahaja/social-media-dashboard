@@ -81,7 +81,10 @@ const About = () => {
         {
           !isUserReady
             ? (
-              <div className="loading" >
+              <div 
+                className="loading" 
+                data-testid="about-loading"
+              >
                 <CircularProgress />
               </div>
             )
@@ -90,22 +93,36 @@ const About = () => {
                 <div className="avatar-name" >
                   {generateAvatarName(user.name)}
                 </div>
-                <div className="name" >
+                <div 
+                  data-testid="about-name"
+                  className="name" 
+                >
                   {user.name}
                 </div>
-                <div className="email" >
+                <div 
+                  data-testid="about-email"
+                  className="email" 
+                >
                   {user.email}
                 </div>
-                <div className="title" >
+                <div 
+                  className="title" 
+                >
                   Address
                 </div>
-                <div className="address" >
+                <div 
+                  data-testid="about-address"
+                  className="address" 
+                >
                   {address}
                 </div>
                 <div className="title" >
                   Phone Number
                 </div>
-                <div className="address" >
+                <div 
+                  data-testid="about-phone"
+                  className="address" 
+                >
                   {user.phone}
                 </div>
               </>

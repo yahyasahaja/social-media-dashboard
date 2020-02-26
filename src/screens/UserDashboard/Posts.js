@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PostContext } from '../../contexts/PostContext';
 import PostsSkeleton from '../../components/PostsSkeleton';
-import Postcard from '../../components/PostCard';
+import PostCard from '../../components/PostCard';
 import { PostDialogStore } from '../../contexts/PostDialogContext';
 import UpdatePostDialog from './UpdatePostDialog';
 import DeletePostDialog from './DeletePostDialog';
@@ -45,7 +45,7 @@ const Posts = props => {
               )
               : (
                 posts.map((post, i) => (
-                  <Postcard 
+                  <PostCard 
                     key={i}
                     post={post}
                     userId={userId}

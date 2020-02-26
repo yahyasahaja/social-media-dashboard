@@ -64,7 +64,10 @@ const Albums = props => {
           {
             !isAlbumReady
               ? (
-                <div className="skeleton-wrapper" >
+                <div 
+                  className="skeleton-wrapper" 
+                  data-testid="albums-loading"
+                >
                   <div className="skeleton-item" >
                     <Skeleton width="100%" height="50px" />
                   </div>
@@ -91,6 +94,7 @@ const Albums = props => {
                       history.push(`/users/${userId}/albums/${album.id}`);
                     }}
                     selected={Number(albumId) === album.id}
+                    data-testid="albums-list-item"
                   >
                     <ListItemText
                       primary={album.title}

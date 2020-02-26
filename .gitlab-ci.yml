@@ -31,7 +31,7 @@ Test:
   before_script: 
     - yarn install 
   script:
-    - CI=true yarn test -- --coverage
+    - CI=true yarn test --coverage
 
 Build:
   image: node:12.5.0
