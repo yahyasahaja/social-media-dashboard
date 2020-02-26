@@ -69,6 +69,7 @@ export default () => {
           label="Title"
           variant="outlined"
           margin="dense"
+          data-testid="new-post-title"
           required
           fullWidth
           value={newPostTitle}
@@ -78,6 +79,7 @@ export default () => {
           label="Body"
           variant="outlined"
           margin="dense"
+          data-testid="new-post-body"
           required
           rows={4}
           multiline
@@ -90,6 +92,7 @@ export default () => {
           variant="contained"
           color="primary"
           className="button"
+          data-testid="new-post-button"
           type="submit"
         >
           Post

@@ -72,7 +72,9 @@ const PostCard = props => {
   let isCommentsReady = !isFetchingComments && comments.length > 0;
 
   return (
-    <StyledPostCard>
+    <StyledPostCard
+      data-testid="post-card"
+    >
       <Card className="card" >
         <div data-testid="post-card-title" className="post-title" >
           {post.title}
@@ -104,6 +106,7 @@ const PostCard = props => {
               variant="outlined" 
               color="primary"
               className="post-button"
+              data-testid="update-post-button"
               onClick={() => {
                 setMutationTitle(post.title);
                 setMutationBody(post.body);
@@ -117,6 +120,7 @@ const PostCard = props => {
               variant="outlined" 
               color="secondary"
               className="post-button"
+              data-testid="delete-post-button"
               onClick={() => {
                 setMutationTitle(post.title);
                 setMutationId(post.id);

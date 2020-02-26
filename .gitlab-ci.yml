@@ -12,6 +12,7 @@ cache:
   paths:
     - node_modules/
     - .yarn
+    - cache/Cypress
 
 # We tell GitLab to install all the packages
 # before running anything.
@@ -20,18 +21,31 @@ cache:
 # Order matters.  
 stages:
   - test
+  - e2e-test
   - build
   # - staging
   - production
 
-# test and build
 Test:
   image: node:12.5.0
   stage: test
   before_script: 
-    - yarn install 
+    - yarn install --frozen-lockfile
   script:
     - CI=true yarn test --coverage
+
+End to end test:
+  image: cypress/base:10
+  stage: e2e-test
+  before_script: 
+    - yarn install --frozen-lockfile
+  script:
+    # check Cypress binary path and cached versions
+    # useful to make sure we are not carrying around old versions
+    - npx cypress install
+    - npx cypress cache path
+    - npx cypress cache list
+    - yarn e2e-test
 
 Build:
   image: node:12.5.0
@@ -56,5 +70,3 @@ Deploy to Production:
     - chmod 600 ~/.ssh/id_dsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - rsync -rav build ubuntu@54.255.249.17:social-media-dashboard
-  only:
-    - master

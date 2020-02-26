@@ -55,6 +55,7 @@ export default props => {
         label="Name"
         variant="outlined"
         margin="dense"
+        data-testid="new-comment-name"
         required
         fullWidth
         value={name}
@@ -65,6 +66,7 @@ export default props => {
         type="email"
         variant="outlined"
         margin="dense"
+        data-testid="new-comment-email"
         required
         fullWidth
         value={email}
@@ -74,6 +76,7 @@ export default props => {
         label="Body"
         variant="outlined"
         margin="dense"
+        data-testid="new-comment-body"
         required
         rows={4}
         multiline
@@ -87,6 +90,7 @@ export default props => {
         color="primary"
         className="button"
         type="submit"
+        data-testid="new-comment-button"
       >
         Post Comment
       </Button>
